@@ -8,14 +8,15 @@ p {font-family: discord; color: white; font-size: 18px; padding-left: 60px; line
 .time {color: #727679; font-size: 12px; line-height: 1px; /* position: relative; top: -2px; */}
 </style>
 
-<body>
+<html oncontextmenu="newmsg(); return false;">
+<body oncontextmenu="newmsg(); return false;">
 
 <h1 style="font-size: 48; font-family: discord; color: white;">fakediscord</h1>
 <h2 style="font-size: 48; font-family: discord; color: white; top: -20px; position: relative;">by lawrencfgsdfg</h2>
 
-<div>
-<input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
-<label for="file" style="cursor: pointer;"><img id="output" width="45" height="45" src="https://i.ibb.co/9WSJPNh/click.png"/></label>
+<div oncontextmenu="return false">
+<input type="file" accept="image/*" name="image1" id="file1" onchange="reload(1)" style="display: none;">
+<label for="file1" style="cursor: pointer;"><img id="output1" width="45" height="45" src="https://i.ibb.co/9WSJPNh/click.png"/></label>
 <p spellcheck="false" style="position: relative; top: -5px;"><b contenteditable="true">person's name</b>&nbsp;&nbsp;&nbsp;&nbsp;<span contenteditable="true" class="time"><b>Today at 1:00 AM</b></span></p>
 <p contenteditable="true" spellcheck="false" style="position: relative; top: -2px;">click to edit what i say</p>
 </div>
@@ -23,8 +24,23 @@ p {font-family: discord; color: white; font-size: 18px; padding-left: 60px; line
 </body>
 
 <script>
-var loadFile = function(event) {
-	var image = document.getElementById('output');
+function reload(id) {
+	var image = document.getElementById('output' + id);
 	image.src = URL.createObjectURL(event.target.files[0]);
+  console.log('output' + id)
 };
+
+var msg = 1;
+function newmsg() { msg++; console.log(msg)
+document.body.innerHTML += `
+<br>
+<div oncontextmenu="return false">
+<input type="file" accept="image/*" name="image${msg}" id="file${msg}" onchange="reload(${msg});" style="display: none;">
+<label for="file${msg}" style="cursor: pointer;"><img id="output${msg}" width="45" height="45" src="https://i.ibb.co/9WSJPNh/click.png"/></label>
+<p spellcheck="false" style="position: relative; top: -5px;"><b contenteditable="true">person's name</b>&nbsp;&nbsp;&nbsp;&nbsp;<span contenteditable="true" class="time"><b>Today at 1:00 AM</b></span></p>
+<p contenteditable="true" spellcheck="false" style="position: relative; top: -2px;">click to edit what i say</p>
+</div>
+`;
+}
 </script>
+</html>
